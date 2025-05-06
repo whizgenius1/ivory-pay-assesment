@@ -59,7 +59,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   );
                 },
-              )),
+              ))
+            else
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(
+                    child: Text('No device found'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        pr.scanForDevices(onScanneComplete: (devices) {
+                          setState(() {
+                            _devices = devices;
+                          });
+                        });
+                      },
+                      child: const Text("Scan again"))
+                ],
+              ),
             ElevatedButton(
               onPressed: _device == null
                   ? null
